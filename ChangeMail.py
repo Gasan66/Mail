@@ -22,7 +22,8 @@ def changeMail(mailASUZD, mailAD):
         return str(err)
     else:
         cnxn.commit()
-        mail = sendMail(mailAD)
+        mail = 'Ok'
+            # sendMail(mailAD)
         return mail
 
 
@@ -54,15 +55,15 @@ def sendMail(to):
 cursor = cnxn.cursor()
 rows = cursor.execute(query).fetchall()
 print(len(rows))
-# for row in rows:
-#     log = changeMail(row.Email_ASUZD, row.Email_AD)
-#     cursor.execute('insert into _log_change_logins values (?, ?, ?, ?, ?)',
-#                    row.Email_ASUZD,
-#                    row.Email_AD,
-#                    log,
-#                    row.UsrAsuzdID,
-#                    row.UserName)
-#     cnxn.commit()
-#     print(row.Email_ASUZD, row.Email_AD, log)
-    # print(row)
+for row in rows:
+    log = changeMail(row.Email_ASUZD, row.Email_AD)
+    cursor.execute('insert into _log_change_logins values (?, ?, ?, ?, ?)',
+                   row.Email_ASUZD,
+                   row.Email_AD,
+                   log,
+                   row.UsrAsuzdID,
+                   row.UserName)
+    cnxn.commit()
+    print(row.Email_ASUZD, row.Email_AD, log)
+    print(row)
 cnxn.close()
